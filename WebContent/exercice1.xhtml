@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<f:view>
+
+			<div class="jumbotron">
+				<h1 class="text-center">Trouver la bonne note</h1>
+
+				<br /> <br /> <br />
+
+				<h:form id="form">
+					<p:growl id="growl" showDetail="true" />
+
+					<h2>#{exos.conditionNote} : #{exos.noteATrouve}</h2>
+
+					<br />
+					<br />
+					<br />
+
+					<c:forEach var="note" items="#{exos.notesMelange}">
+						<p:commandButton value="#{note}"
+							action="#{exos.checkResult(note)}" update="growl @form" />
+					</c:forEach>
+
+					<br />
+					<br />
+					<br />
+					<h:panelGrid columns="2" cellpadding="105">
+						<p>Sucess : #{exos.nbSuccess}</p>
+						<p>Failure : #{exos.nbFailure}</p>
+					</h:panelGrid>
+
+					<br />
+					<br />
+					<br />
+					<p:commandButton value="Recommencer" action="#{exos.recommencer}"
+						update="growl @form" />
+				</h:form>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+</html>
